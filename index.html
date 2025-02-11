@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designer Ink Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Designer Ink Request Form</h1>
+        <form id="inkForm">
+            <label for="inkName">Ink Name / Radius Customer Code:</label>
+            <input type="text" id="inkName" name="inkName" required>
+
+            <label for="colorStrategy">Colour Strategy:</label>
+            <select id="colorStrategy" name="colorStrategy">
+                <option value="4 Colour Strategy - WS6000CMYK_SGW_AE18">4 Colour Strategy - WS6000CMYK_SGW_AE18</option>
+                <option value="4 Colour Strategy Plus White - WS6000CMYK_White_AE18">4 Colour Strategy Plus White - WS6000CMYK_White_AE18</option>
+                <option value="6 Colour Strategy (7 Minus Green Plus White) - WS6600_CMYKOV_White_AE18">6 Colour Strategy (7 Minus Green Plus White) - WS6600_CMYKOV_White_AE18</option>
+                <option value="7 Colour Strategy - WS6600_CMYKOVG_AE18">7 Colour Strategy - WS6600_CMYKOVG_AE18</option>
+            </select>
+
+            <label for="startingPoint">Starting Point:</label>
+            <select id="startingPoint" name="startingPoint">
+                <option value="MCC PMS Book">MCC PMS Book</option>
+                <option value="CMYK Breakdown">CMYK Breakdown</option>
+                <option value="As per #add item code">As per #add item code</option>
+                <option value="Matching to Sample - Spectro Reading">Matching to Sample - Spectro Reading</option>
+            </select>
+
+            <!-- Pantone Colour Name Field -->
+            <label for="pantoneName">Pantone Colour Name:</label>
+            <input type="text" id="pantoneName" name="pantoneName">
+
+            <div class="cmyk-inputs" id="cmykInputs">
+                <div>
+                    <label for="c">C:</label>
+                    <input type="text" id="c" name="c" maxlength="3" placeholder="0-100">
+                </div>
+                <div>
+                    <label for="m">M:</label>
+                    <input type="text" id="m" name="m" maxlength="3" placeholder="0-100">
+                </div>
+                <div>
+                    <label for="y">Y:</label>
+                    <input type="text" id="y" name="y" maxlength="3" placeholder="0-100">
+                </div>
+                <div>
+                    <label for="k">K:</label>
+                    <input type="text" id="k" name="k" maxlength="3" placeholder="0-100">
+                </div>
+                <div>
+                    <label for="O">O:</label>
+                    <input type="text" id="O" name="O" maxlength="3" placeholder="0-100">
+                </div>
+                <div>
+                    <label for="V">V:</label>
+                    <input type="text" id="V" name="V" maxlength="3" placeholder="0-100">
+                </div>
+                <div>
+                    <label for="G">G:</label>
+                    <input type="text" id="G" name="G" maxlength="3" placeholder="0-100">
+                </div>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startingPointSelect = document.getElementById('startingPoint');
+            const pantoneNameField = document.getElementById('pantoneName');  // Pantone Name field
+            const pantoneLabel = document.querySelector('label[for="pantoneName"]');  // Pantone label
+            const cmykInputs = document.getElementById('cmykInputs');
+            const cmykLabel = document.querySelector('label[for="c"]');  // CMYK Label
+
+            // Function to toggle visibility of Pantone Colour Name field
+            function togglePantoneFieldVisibility() {
+                const selectedStartingPoint = startingPointSelect.value;
+                if (selectedStartingPoint === 'CMYK Breakdown' || selectedStartingPoint === 'Matching to Sample - Spectro Reading') {
+                    // Hide Pantone Colour Name input and label
+                    pantoneNameField.classList.add('hidden');
+                    pantoneLabel.classList.add('hidden');
+                } else {
+                    // Show Pantone Colour Name input and label
+                    pantoneNameField.classList.remove('hidden');
+                    pantoneLabel.classList.remove('hidden');
+                }
+            }
+
+            // Function to toggle visibility of CMYK inputs
+            function toggleCMYKVisibility() {
+                const selectedStartingPoint = startingPointSelect.value;
+                if (selectedStartingPoint === 'MCC PMS Book') {
+                    // Hide CMYK inputs and label
+                    cmykInputs.classList.add('hidden');
+                    cmykLabel.classList.add('hidden');
+                } else {
+                    // Show CMYK inputs and label
+                    cmykInputs.classList.remove('hidden');
+                    cmykLabel.classList.remove('hidden');
+                }
+            }
+
+            // Function to hide the "Matching to Sample - Spectro Reading" field
+            function toggleMatchingtoSampleSpectroReading() {
+                const selectedStartingPoint = startingPointSelect.value;
+                if (selectedStartingPoint === 'Matching to Sample - Spectro Reading') {
+                    // Hide both Pantone and CMYK sections
+                    pantoneNameField.classList.add('hidden');
+                    pantoneLabel.classList.add('hidden');
+                    cmykInputs.classList.add('hidden');
+                    cmykLabel.classList.add('hidden');
+                } else {
+                    // Otherwise, show the inputs based on logic
+                    togglePantoneFieldVisibility();
+                    toggleCMYKVisibility();
+                }
+            }
+
+            // Initial checks to hide/show inputs based on default value
+            togglePantoneFieldVisibility();
+            toggleCMYKVisibility();
+
+            // Event listener for changes to the starting point dropdown
+            startingPointSelect.addEventListener('change', function() {
+                togglePantoneFieldVisibility();  // Toggle Pantone field visibility
+                toggleCMYKVisibility();          // Toggle CMYK field visibility
+                toggleMatchingtoSampleSpectroReading();  // Toggle "Matching to Sample" visibility
+            });
+
+            // Form submission logic
+            document.getElementById("inkForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Get form data
+                const inkName = document.getElementById("inkName").value;
+                const colorStrategy = document.getElementById("colorStrategy").value;
+                const startingPoint = document.getElementById("startingPoint").value;
+                const pantoneName = document.getElementById("pantoneName").value;
+
+                // Get the CMYK values
+                const c = document.getElementById("c").value;
+                const m = document.getElementById("m").value;
+                const y = document.getElementById("y").value;
+                const k = document.getElementById("k").value;
+                const o = document.getElementById("O").value;
+                const v = document.getElementById("V").value;
+                const g = document.getElementById("G").value;
+
+                // Format CMYK as a list (only include if CMYK inputs are visible)
+                const cmykList = (startingPoint !== 'MCC PMS Book') ? `
+                    C: ${c}
+                    M: ${m}
+                    Y: ${y}
+                    K: ${k}
+                    O: ${o}
+                    V: ${v}
+                    G: ${g}
+                ` : '';
+
+                // Create the content to be saved in the text file
+                const fileContent = `Designer Ink Name: ${inkName}\n` +
+                                    `Colour Strategy: ${colorStrategy}\n` +
+                                    `Starting Point: ${startingPoint}\n` +
+                                    `Pantone Colour Name: ${pantoneName}\n` +
+                                    `CMYK Breakdown:\n${cmykList}` +
+                                    `----------- NOTES --------------\n`;
+
+                // Create a Blob with the file content
+                const blob = new Blob([fileContent], { type: "text/plain" });
+                const link = document.createElement("a");
+
+                // Generate a timestamped filename
+                const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+                const filename = `InkForm_${timestamp}.txt`;
+
+                // Create a download link for the file
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+
+                // Simulate a click to download the file
+                link.click();
+            });
+        });
+    </script>
+
+    <style>
+        /* Hide elements by default with this class */
+        .hidden {
+            display: none;
+        }
+    </style>
+</body>
+</html>
