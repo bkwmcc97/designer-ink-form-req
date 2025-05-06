@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ` : '';
 
         // Create the content to be saved in the text file
-        const fileContent = `Radius Customer Code: ${inkName}\n` +
+        const fileContent = `Multiart Project code: ${inkName}\n` +
                             `Colour Strategy: ${colorStrategy}\n` +
                             `Starting Point: ${startingPoint}\n` +
                             `Pantone Colour Name: ${pantoneName}\n` + // Include Pantone name
