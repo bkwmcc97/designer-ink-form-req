@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const fileContent = `Radius Customer Code: ${inkName}\n` +
                             `Colour Strategy: ${colorStrategy}\n` +
+                            `Stock: ${stock}\n` +
                             `Starting Point: ${startingPoint}\n` +
                             `Pantone Colour Name: ${pantoneName}\n` +
                             `CMYK Breakdown:\n${cmykList}` +
