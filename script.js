@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const inkName = document.getElementById("inkName").value;
         const colorStrategy = document.getElementById("colorStrategy").value;
+        const stock = document.getElementById("stock").value;
         const startingPoint = document.getElementById("startingPoint").value;
         const pantoneName = document.getElementById("pantoneName").value;
         const c = document.getElementById("c").value;
