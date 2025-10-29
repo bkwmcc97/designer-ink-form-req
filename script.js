@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pantoneLabel = document.querySelector('label[for="pantoneName"]');
     const inkNameInput = document.getElementById('inkName'); // Radius Customer Code input
 
-    // 🔒 Restrict Radius Customer Code to digits only
+    // Restrict Radius Customer Code to digits only
     inkNameInput.addEventListener('input', function () {
         this.value = this.value.replace(/\D/g, ''); // Remove non-digit characters
     });
