@@ -66,6 +66,41 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("inkForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevent the default form submission
 
+        document.addEventListener('DOMContentLoaded', function() {
+  // 1. Get references to the form and the error message element
+  const form = document.getElementById('myForm');
+  const errorMessage = document.getElementById('error-message');
+
+  // 2. Attach an event listener to the form's 'submit' event
+  form.addEventListener('submit', function(event) {
+    // Check if the form is valid according to the 'required' attributes
+    if (!form.checkValidity()) {
+      // 3. Stop the form from submitting
+      event.preventDefault(); 
+      
+      // 4. Display a custom error message
+      errorMessage.style.display = 'block'; 
+      
+      // Optionally, you can also use an alert:
+      // alert('Validation failed. Please fill in all required fields.'); 
+      
+      // Note: Modern browsers will automatically show popups for 'required' fields
+      // and focus on the first missing field when checkValidity() is false.
+    } else {
+      // If the form is valid, hide any previous error messages
+      errorMessage.style.display = 'none';
+      
+      // 5. Optionally, prevent default here too if you want to use AJAX
+      // event.preventDefault(); 
+      
+      // If you don't call event.preventDefault(), the form will submit normally.
+      
+      console.log('Form is valid and ready to be submitted!');
+      
+      // Example of custom action instead of submission:
+      // alert('Form submitted successfully!');
+    }
+
         // Get form data
         const inkName = document.getElementById("inkName").value;
         const colorStrategy = document.getElementById("colorStrategy").value;
