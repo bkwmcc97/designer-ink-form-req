@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ` : '';
 
         // Create the content to be saved in the text file
-        const fileContent = `Designer Ink Name: ${inkName}\n` +
+        const fileContent = `Radius Customer Number: ${inkName}\n` +
                             `Colour Strategy: ${colorStrategy}\n` +
                             `Stock: ${stock}\n` +
                             `Starting Point: ${startingPoint}\n` +
