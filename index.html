@@ -10,7 +10,7 @@
     <div class="container">
         <h1>Designer Ink Request Form</h1>
         <form id="inkForm">
-            <label for="inkName">Ink Name / Radius Customer Code:</label>
+            <label for="inkName">Radius Customer Code:</label>
             <input type="text" id="inkName" name="inkName" required>
 
             <label for="colorStrategy">Colour Strategy:</label>
@@ -173,8 +173,9 @@
                 ` : '';
 
                 // Create the content to be saved in the text file
-                const fileContent = `Designer Ink Name: ${inkName}\n` +
+                const fileContent = `Radius Customer Number: ${inkName}\n` +
                                     `Colour Strategy: ${colorStrategy}\n` +
+                                    `Stock: ${stock}\n` +
                                     `Starting Point: ${startingPoint}\n` +
                                     `Pantone Colour Name: ${pantoneName}\n` +
                                     `CMYK Breakdown:\n${cmykList}` +
